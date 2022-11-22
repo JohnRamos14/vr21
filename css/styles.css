@@ -1,0 +1,22 @@
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    width: 300px;
+}
+
+th {
+    background-color: cadetblue;
+}
+
+tfoot {
+    background-color: cadetblue;
+}
+
+form {
+    margin-left: 10px;
+    margin-top: 25px;
+}
+body{
+    background-color: #b4e6d7;
+}
