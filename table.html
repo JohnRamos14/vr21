@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
 
-
 <style>
-     th, td {
+
+    th,
+    td {
         border: 1px solid black;
+        padding: 10px;
+        width: 300px;
     }
-    th{
+
+    th {
         background-color: cadetblue;
     }
-    tfoot{
+
+    tfoot {
         background-color: cadetblue;
+    }
+
+    form {
+        margin-top: 25px;
     }
 </style>
 
-
 <body>
+    <form action="table.html" method="POST">
+        <input type="text" name="name" placeholder="Name" />
+        <input type="text" id="userAge" name="age" placeholder="Age" />
+        <input type="text" name="location" placeholder="location" />
+        <button id="submit-btn" type="submit">Submit</button>
+    </form>
+    <br />
     <table>
         <caption>
-            <strong>Users</strong></caption>
+            <strong>Users</strong>
+        </caption>
         <tr>
             <th>First Name</th>
             <th>Age</th>
@@ -55,13 +72,43 @@
             <td>19</td>
             <td>Florida</td>
         </tr>
-      <tfoot>
-        <tr>
-          <td>Total Users: 5</td>
-          <td>Ave. Age: 30</td>
-        </tr>
-      </tfoot>
+        <!-- <tfoot>
+            <tr>
+                <td>Total Users: 5 </td> 
+                <td>Ave. Age: 30</td>
+            </tr>
+        </tfoot> -->
     </table>
-
+    <br />
+    <select name="cars" id="cars">
+        <option>Please select a car</option>
+        <option value="Mercedes">Mercedes</option>
+        <option value="BMW">BMW</option>
+        <option value="Lamborghini">Lamborghini</option>
+        <option value="Ferrari">Ferrari</option>
+    </select>
+    <script>
+        const submitBtn = document.getElementById("submit-btn");
+        submitBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const table = document.querySelector("table");
+            const tfoot = document.querySelector("tfoot");
+            const tr = document.createElement("tr");
+            const td1 = document.createElement("td");
+            const td2 = document.createElement("td");
+            const td3 = document.createElement("td");
+            const name = document.querySelector('input[name="name"]');
+            const age = document.querySelector('input[name="age"]');
+            const location = document.querySelector('input[name="location"]');
+            td1.textContent = name.value;
+            td2.textContent = age.value;
+            td3.textContent = location.value;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            table.insertBefore(tr, tfoot);
+        });
+    </script>
 </body>
+
 </html>
