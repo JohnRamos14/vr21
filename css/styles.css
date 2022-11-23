@@ -16,7 +16,13 @@ tfoot {
 form {
     margin-left: 10px;
     margin-top: 25px;
+    
 }
 body{
     background-color: #b4e6d7;
 }
+
+a{
+padding-left: 10px;
+}
+
