@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectors Exercise</title>
+    <style>
+        div {
+            margin: 1em;
+            padding: 0.5em;
+        }
+
+        div:first-of-type {
+            background-color: lightgray;
+            font-style: italic;
+        }
+
+        div:nth-of-type(2) {
+            background-color: black;
+            color: yellow;
+        }
+        div:nth-of-type(3) {
+            background-color: lightblue;
+        }
+       
+        div:nth-of-type(3) > div {
+            background-color: maroon;
+            color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>Steak</li>
+            <li>Sushi</li>
+            <li>Pizza</li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li>Pulp Fiction</li>
+            <li>Black Hawk Down</li>
+            <li>Forest Gump</li>
+        </ul>
+    </div>
+    <div>
+        <div>
+            <ul>
+                <li>Terminal List</li>
+                <li>Ozark</li>
+                <li>Squid Games</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
