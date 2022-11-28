@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box-Sizing</title>
+    <style>
+            .content-box {
+            box-sizing: content-box;
+            width: 200px;
+            padding: 1rem;
+            border: 3px solid black;
+           
+        }
+
+        .border-box {
+            box-sizing: border-box;
+            width: 200px;
+            padding: 1rem;
+            border: 3px solid black;
+        
+        }
+        .border-box:hover {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <img src="https://andscape.com/wp-content/uploads/2017/06/nbalogo.jpg?w=700" alt="nbalogo" width="100%">
+    </div>
+    <div class="border-box">
+        <img src="http://cdn.shopify.com/s/files/1/0480/9470/7866/collections/6ee2c6b7a845de4046c7afb85c2e88eb.jpg?v=1646869409" alt="nfllogo" width="100%">
+    </div>
+</body>
+</html>
