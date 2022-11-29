@@ -1,4 +1,3 @@
-
 let motorcycles = [
   //   {
   //     id: 1,
@@ -57,14 +56,17 @@ let motorcycles = [
   //       "With supporting text below as a natural lead-in to additional content.",
   //   },
 ];
+let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle")) || [];
+window.onload = displayMotorcycle();
 
+//envent listeners
 document.querySelector("#addMoto").addEventListener("click", () => {
-  console.log("clicked");
   addMotorcycle();
+  window.location.reload();
 });
 
 document.querySelector("#deleteMoto").addEventListener("click", () => {
-  deleteItem();
+  deleteMotorcycle();
 });
 
 function addMotorcycle() {
@@ -72,38 +74,32 @@ function addMotorcycle() {
   let motorcycleImage = document.getElementById("motoImage").value;
   let motorcycleDescription = document.getElementById("motoDesc").value;
   let motorcycleObject = {
-    id: motorcycles.length + 1,
     name: motorcycleMake,
     imageUrl: motorcycleImage,
     description: motorcycleDescription,
   };
 
-  if(localStorage.getItem("motorcycle") === null){
+  if (localStorage.getItem("motorcycle") === null) {
     motorcycles = [];
-  }else{
+  } else {
     motorcycles = JSON.parse(localStorage.getItem("motorcycle"));
   }
-
   localStorage.setItem("motorcycle", JSON.stringify(motorcycles));
   motorcycles.push(motorcycleObject);
   localStorage.setItem("motorcycle", JSON.stringify(motorcycles));
   console.log(motorcycleObject);
   return { motorcycleObject };
-
 }
 
-window.onload = displayMotorcycle();
-
 function displayMotorcycle() {
-       
-  motorcycles.map((motorcycle) => {
+  retrieveMotorcycle.map((motorcycle) => {
     let card = document.createElement("div");
     card.classList.add("col-md-3");
     card.innerHTML = `
   <div class="card text-center">
         <div class="card-body">
           <h5 class="card-title" id="nameMoto">${motorcycle.name}</h5>
-          <img src="${motorcycle.imageUrl}" alt="motoImg" />
+          <img src="${motorcycle.imageUrl}" alt="motoImg"/>
           <p class="card-text">
             ${motorcycle.description}
           </p>
@@ -113,10 +109,10 @@ function displayMotorcycle() {
             class="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
+            id="toDelete"
           >
             Delete
           </button>
-          <input type="hidden" id="id" value="${motorcycle.id}" />
         </div>
       </div>
       `;
@@ -124,43 +120,14 @@ function displayMotorcycle() {
   });
 }
 
+function deleteMotorcycle() {
 
+  let motorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+  let motoName = document.getElementById("nameMoto").value;
+  let motoIndex = motorcycle.findIndex((motorcycle) => motorcycle.name === motoName);
+  motorcycle.splice(motoIndex,1);
+  console.log(motorcycle);
+  localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
+  window.location.reload();
+}
 
-let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle")) || [];
-let motorcycleList = retrieveMotorcycle.map((motorcycle) => {
-  let card = document.createElement("div");
-  card.classList.add("col-md-3");
-  card.innerHTML = `
-  <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">${motorcycle.name}</h5>
-          <img src="${motorcycle.imageUrl}" alt="motoImg" />
-          <p class="card-text">
-            ${motorcycle.description}
-          </p>
-          <button type="button" class="btn btn-secondary">Update</button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
-            Delete
-          </button>
-          <input type="hidden" id="id" value="${motorcycle.id}"
-        </div>
-      </div>
-      `;
-  document.querySelector(".row").appendChild(card);
-});
-
-// delete item from local storage
-// function deleteItem() {
-//   let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
-//   let deleteItem = document.getElementById('nameMoto').value;
-//   let filteredMotorcycle = retrieveMotorcycle.filter(
-//     (motorcycle) => motorcycle.name !== deleteItem
-//   );
-//   localStorage.setItem("motorcycle", JSON.stringify(filteredMotorcycle));
-//   displayMotorcycle();
-// }
