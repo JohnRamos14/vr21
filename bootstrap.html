@@ -55,7 +55,7 @@
             Cancel
           </button>
           <!-- not functional at the moment -->
-          <button type="button" class="btn btn-primary">Confirm</button>
+          <button type="button" class="btn btn-primary" id="deleteMoto">Confirm</button>
         </div>
       </div>
     </div>
@@ -74,26 +74,26 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="motoForm">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Make and Model</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1"
+            <input type="text" class="form-control" id="motoMake"
               placeholder="Ducati Streetfighter, BMW S1000RR, Kawasaki Ninja" />
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Image Url</label>
-            <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Ducati, BMW, Kawasaki" />
+            <input type="text" class="form-control" id="motoImage" placeholder="Ducati, BMW, Kawasaki" />
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="motoDesc" rows="3"></textarea>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="addMoto">Save</button>
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@
     </form>
   </nav>
 
-  <div class="container">
+  <div class="container" id="motoCard">
     <div class="row">
       <!-- <div class="col-md-3 text-center">
           <div class="card">
@@ -562,16 +562,94 @@
         description:
           "With supporting text below as a natural lead-in to additional content.",
       },
+      {
+        id: 7,
+        name: "Norton Commando",
+        imageUrl:
+          "https://www.bikesrepublic.com/wp-content/uploads/2019/04/Norton-Brietling-Sport-1-696x522.jpg",
+        description:
+          "With supporting text below as a natural lead-in to additional content.",
+      },
     ];
     localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
     let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
     console.log(retrieveMotorcycle);
 
+    // window.onload = displayMotorcycle();
+
+    // document.querySelector("#addMoto").addEventListener("click", () => {
+    //   addMotorcycle();
+    // });
+    // document.querySelector("#deleteMoto").addEventListener("click", () => {
+    //   deleteItem();
+    // });
+
+    // function addMotorcycle() {
+
+    //   let motorcycleMake = document.getElementById("motoMake").value;
+    //   let motorcycleImage = document.getElementById("motoImage").value;
+    //   let motorcycleDescription = document.getElementById("motoDesc").value;
+    //   let motorcycleObject = {
+
+    //     name: motorcycleMake,
+    //     imageUrl: motorcycleImage,
+    //     description: motorcycleDescription,
+    //   };
+
+    //   localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
+   
+    //   motorcycle.push(motorcycleObject);
+    //   localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
+     
+    // };
+
+    // function displayMotorcycle() {
+    //   let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+    //   let motorcycleContainer = document.getElementById("motoCard");
+    //   retrieveMotorcycle.map((motorcycle) => {
+    //     let card = document.createElement("div");
+    //     card.classList.add("col-md-3");
+    //     card.innerHTML = `
+    //   <div class="card text-center">
+    //         <div class="card-body">
+    //           <h5 class="card-title" id="nameMoto">${motorcycle.name}</h5>
+    //           <img src="${motorcycle.imageUrl}" alt="motoImg" />
+    //           <p class="card-text">
+    //             ${motorcycle.description}
+    //           </p>
+    //           <button type="button" class="btn btn-secondary">Update</button>
+    //           <button
+    //             type="button"
+    //             class="btn btn-danger"
+    //             data-bs-toggle="modal"
+    //             data-bs-target="#staticBackdrop"
+    //           >
+    //             Delete
+    //           </button>
+    //         </div>
+    //       </div>
+    //       `;
+    //     document.querySelector(".row").appendChild(card);
+    //   });
+
+    // }
+
+    //delete item from local storage
+    // function deleteItem() {
+    //   let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+    //   let deleteItem = document.getElementById("nameMoto").value;
+    //   let filteredMotorcycle = retrieveMotorcycle.filter(
+    //     (motorcycle) => motorcycle.name !== deleteItem
+    //   );
+    //   localStorage.setItem("motorcycle", JSON.stringify(filteredMotorcycle));
+    //   displayMotorcycle();
+    // }
+
     let motorcycleList = retrieveMotorcycle.map((motorcycle) => {
       let card = document.createElement("div");
       card.classList.add("col-md-3");
       card.innerHTML = `
-          <div class="card text-center">
+      <div class="card text-center">
             <div class="card-body">
               <h5 class="card-title">${motorcycle.name}</h5>
               <img src="${motorcycle.imageUrl}" alt="motoImg" />
