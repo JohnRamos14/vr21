@@ -74,11 +74,10 @@ console.log(singleLetterCount("Rithm School", "o"));
 const multipleLetterCount = (str) => {
     let obj = {};
     for (let i = 0; i < str.length; i++) {
-        let letter = str[i];
-        if (obj[letter]) {
-            obj[letter]++;
+        if (obj[str[i]]) {
+            obj[str[i]]++;
         } else {
-            obj[letter] = 1;
+            obj[str[i]] = 1;
         }
     }
     return obj;
