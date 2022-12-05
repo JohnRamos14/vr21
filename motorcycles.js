@@ -77,7 +77,7 @@ document.querySelector("#deleteMoto").addEventListener("click", (e) => {
 //   updateMotorcycle();
 // });
 
-function addMotorcycle() {
+function addMotorcycle  ()  {
   let motorcycleMake = document.getElementById("motoMake").value;
   let motorcycleImage = document.getElementById("motoImage").value;
   let motorcycleDescription = document.getElementById("motoDesc").value;
@@ -132,7 +132,6 @@ function displayMotorcycle() {
   }
 }
 
-  // deleteMotorcycle(getId);
 //   let card = document.createElement("div");
 //   card.classList.add("col-md-3");
 //   card.innerHTML = `
@@ -181,17 +180,17 @@ function updateMotorcycle(data) {
   console.log(motorcycleObject);
   return { motorcycleObject };
 }
-
-// how to target the id of the button that was clicked
-function deleteMotorcycle() {
+//Delete motorcycle
+function deleteMotorcycle(id) {
   let getId = document.querySelector(".btn-danger").id;
-  console.log(getId);
   let motorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+  console.log(getId);
   for (let i = 0; i < motorcycle.length; i++) {
-    if (motorcycle[i].name === getId) {
+    if (getId === motorcycle[i].name) {
       motorcycle.splice(i, 1);
+      localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
+      location.reload(true);
     }
   }
-  localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
-  location.reload(true);
 }
+
