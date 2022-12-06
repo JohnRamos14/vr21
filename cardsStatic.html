@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/staticCards.css">
+</head>
+
+<body>
+
+    <!-- Modal for Add -->
+    <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        Add Motorcycle
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="motoForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Make and Model</label>
+                        <input type="text" class="form-control" id="motoMake" name="make"
+                            placeholder="Ducati Streetfighter, BMW S1000RR, Kawasaki Ninja" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label" name="image">Image Url</label>
+                        <input type="text" class="form-control" id="motoImage" placeholder="Ducati, BMW, Kawasaki" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="motoDesc" rows="3" name="desc"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="addMoto">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Delete -->
+    <div class="modal fade" id="exampleModalLongDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to delete?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelDelete">
+                        Cancel
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="confirmDelete">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- for update modal -->
+    <div class="modal" id="exampleModalLongUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateTitle">
+                        Update Motorcycle
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="motoUpdateForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Make and Model</label>
+                        <input type="text" class="form-control" id="updateMake" name="make"
+                            placeholder="Ducati Streetfighter, BMW S1000RR, Kawasaki Ninja" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label" name="image">Image Url</label>
+                        <input type="text" class="form-control" id="updateImage" placeholder="Ducati, BMW, Kawasaki" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="updateDesc" rows="3" name="desc"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateSub">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid justify-content-center">
+            <button id="add-button" class="btn btn-outline-success me-2" data-bs-toggle="modal"
+                data-bs-target="#exampleModalLong" type="button">
+                Add Motorcycle
+            </button>
+        </form>
+    </nav>
+
+    <div class="container" id="motoCard">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW S1000 RR</h5>
+                        <img src="https://www.cycleworld.com/resizer/8YPhpKAM3o3nUTrD7uemcFxyJ54=/200x0/smart/cloudfront-us-east-1.images.arcpublishing.com/octane/4BVDKKZ34J3PFJEAVIV23LZRA4.jpg"
+                            alt="s100rr" />
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate">Update</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLongDelete">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
+    <!-- <script src="motorcycles.js"></script> -->
+</body>
+
+</html>

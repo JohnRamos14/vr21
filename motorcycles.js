@@ -39,7 +39,6 @@ function addMotorcycle() {
     retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
   }
 
-  localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
   retrieveMotorcycle.push(motorcycleObject);
   localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
   console.log(motorcycleObject);
@@ -60,8 +59,7 @@ function displayMotorcycle() {
     <img src="${motoImage}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${motoName}</h5>
-      <p class="card-text">${motoDescription}</p>
-      
+      <p class="card-text">${motoDescription}</p>  
       <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate"
             type="button" id="${motoName}">Update</button>
       <button
@@ -99,7 +97,9 @@ function displayMotorcycle() {
         description: idToUpdate.description,
       };
       console.log(obj);
+      return {obj}
     });
-    document.querySelector(".row").appendChild(motoDiv);
+    document.querySelector(".row").insertAdjacentElement("beforeend", motoDiv);
   });
 }
+

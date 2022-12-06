@@ -1,0 +1,19 @@
+body {
+    background: linear-gradient(70deg, rgba(2, 0, 36, 1) 0%, rgb(31, 31, 61) 0%, rgb(4, 86, 102) 100%);
+}
+
+.navbar {
+    padding: 1rem;
+    margin-bottom: 3em;
+
+}
+
+#motoCard{
+
+    padding: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.card{
+    margin-top: 1em;
+}
