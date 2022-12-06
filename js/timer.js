@@ -1,12 +1,15 @@
 let timerId;
 let counter = 0;
 
+function displayCounter() {
+  document.querySelector(".count").innerText = counter;
+}
+
 function start() {
   if (!timerId) {
     timerId = setInterval(() => {
       counter++;
-      document.querySelector(".count").innerText = counter;
-      console.log(counter);
+      displayCounter();
     }, 1000);
   }
 }
@@ -18,6 +21,6 @@ function stop() {
 
 function reset() {
   counter = 0;
-  document.querySelector(".count").innerText = counter;
   stop();
+  displayCounter();
 }
