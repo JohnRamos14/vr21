@@ -11,7 +11,6 @@ document.querySelector("#addMoto").addEventListener("click", (e) => {
 //confirm delete
 document.querySelector("#confirmDelete").addEventListener("click", (e) => {
   e.preventDefault();
-  alert("Motorcycle deleted successfully");
   location.reload(true);
 });
 
