@@ -11,7 +11,7 @@ function createMeme() {
   let memeObject = {
     textTop: topText,
     url: memeUrl,
-    textBottom: bottomText
+    textBottom: bottomText,
   };
 
   let memeDiv = document.createElement("div");
