@@ -59,25 +59,14 @@
 let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle")) || [];
 window.onload = displayMotorcycle();
 
-//envent listeners
+//event listener to add motorcycle
 document.querySelector("#addMoto").addEventListener("click", (e) => {
   e.preventDefault();
   addMotorcycle();
   location.reload(true);
 });
 
-document.querySelector("#deleteMoto").addEventListener("click", (e) => {
-  e.preventDefault();
-  // testGetId();
-  deleteMotorcycle();
-  // location.reload(true);
-});
-
-// document.querySelector("#update").addEventListener("click", () => {
-//   updateMotorcycle();
-// });
-
-function addMotorcycle  ()  {
+function addMotorcycle() {
   let motorcycleMake = document.getElementById("motoMake").value;
   let motorcycleImage = document.getElementById("motoImage").value;
   let motorcycleDescription = document.getElementById("motoDesc").value;
@@ -96,101 +85,65 @@ function addMotorcycle  ()  {
   retrieveMotorcycle.push(motorcycleObject);
   localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
   console.log(motorcycleObject);
+
   return { motorcycleObject };
 }
 
 function displayMotorcycle() {
   let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle")) || [];
-  for (let i = 0; i < retrieveMotorcycle.length; i++) {
-    let moto = retrieveMotorcycle[i];
+  retrieveMotorcycle.map((moto) => {
     let motoName = moto.name;
     let motoImage = moto.imageUrl;
     let motoDescription = moto.description;
     let motoDiv = document.createElement("div");
-    motoDiv.classList.add("col-md-3");
+    motoDiv.classList.add("col-lg-3", "col-md-4", "col-sm-6");
     motoDiv.innerHTML = `
     <div class="card text-center">
     <img src="${motoImage}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${motoName}</h5>
       <p class="card-text">${motoDescription}</p>
+      
       <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate"
-            type="button" id="update">Update</button>
+            type="button" id="${motoName}">Update</button>
       <button
              type="button"
-             class="btn btn-danger"
-         data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
-             id=${motoName}
+              class="btn btn-danger"
+             id="${motoName}"
                    >
              Delete
           </button>
     </div>
   </div>
     `;
-    document.querySelector(".row").appendChild(motoDiv);
-  }
-}
+    // event listener to delete target
+    motoDiv.querySelector(".btn-danger").addEventListener("click", (e) => {
+      let retrieveMotorcycle = JSON.parse(
+        localStorage.getItem("motorcycle")
+      ).filter((moto) => moto.name !== e.target.id);
 
-//   let card = document.createElement("div");
-//   card.classList.add("col-md-3");
-//   card.innerHTML = `
-// <div class="card text-center">
-//       <div class="card-body">
-//         <h5 class="card-title" id=${motorcycle.name}>${motorcycle.name}</h5>
-//         <img id="imageUpdateMoto" src="${motorcycle.imageUrl}" alt="motoImg"/>
-//         <p class="card-text" id="descUpdateMoto">
-//           ${motorcycle.description}
-//         </p>
-//         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLongUpdate"
-//       type="button" id="update">Update</button>
-//         <button
-//           type="button"
-//           class="btn btn-danger"
-//           data-bs-toggle="modal"
-//           data-bs-target="#staticBackdrop"
-//           id=${motorcycle.name}
-
-//         >
-//           Delete
-//         </button>
-//       </div>
-//     </div>
-//     `;
-//   document.querySelector(".row").appendChild(card);
-
-// function testGetId() {
-//   let getId = document.querySelector(".btn-danger").id;
-//   console.log(getId);
-// }
-
-// delete motorcycle
- 
-function updateMotorcycle(data) {
-  let motorcycle = JSON.parse(localStorage.getItem("motorcycle"));
-  document.getElementById("updateNameMoto").value = motorcycle[0].name;
-  document.getElementById("imageUpdateMoto").value = motorcycle[0].imageUrl;
-  document.getElementById("descUpdateMoto").value = motorcycle[0].description;
-  let motorcycleObject = {
-    name: motorcycle[0].name,
-    imageUrl: motorcycle[0].imageUrl,
-    description: motorcycle[0].description,
-  };
-
-  console.log(motorcycleObject);
-  return { motorcycleObject };
-}
-//Delete motorcycle
-function deleteMotorcycle(id) {
-  let getId = document.querySelector(".btn-danger").id;
-  let motorcycle = JSON.parse(localStorage.getItem("motorcycle"));
-  console.log(getId);
-  for (let i = 0; i < motorcycle.length; i++) {
-    if (getId === motorcycle[i].name) {
-      motorcycle.splice(i, 1);
-      localStorage.setItem("motorcycle", JSON.stringify(motorcycle));
+      localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
       location.reload(true);
-    }
-  }
+    });
+    // event listener to update target
+    motoDiv.querySelector(".btn-secondary").addEventListener("click", (e) => {
+      let targetId = e.target.id;
+      let retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+      let idToUpdate = retrieveMotorcycle.find(
+        (moto) => moto.name === targetId
+      );
+      document.querySelector("#updateMake").value = idToUpdate.name;
+      document.querySelector("#updateImage").value = idToUpdate.imageUrl;
+      document.querySelector("#updateDesc").value = idToUpdate.description;
+      let obj = {
+        name: idToUpdate.name,
+        imageUrl: idToUpdate.imageUrl,
+        description: idToUpdate.description,
+      };
+      console.log(obj);
+    });
+    document.querySelector(".row").appendChild(motoDiv);
+  });
 }
+
 
