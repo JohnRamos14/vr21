@@ -11,14 +11,35 @@ document.querySelector("#addMoto").addEventListener("click", (e) => {
 //confirm delete
 document.querySelector("#confirmDelete").addEventListener("click", (e) => {
   e.preventDefault();
+  alert("Motorcycle deleted successfully");
   location.reload(true);
 });
 
 //event listener to update motorcycle
 document.querySelector("#updateSub").addEventListener("click", (e) => {
   e.preventDefault();
-  addMotorcycle();
+
+  let obj = {};
+
+  let motorcycleMake = document.getElementById("updateMake").value;
+  let motorcycleImage = document.getElementById("updateImage").value;
+  let motorcycleDescription = document.getElementById("updateDesc").value;
+  obj = {
+    name: motorcycleMake,
+    imageUrl: motorcycleImage,
+    description: motorcycleDescription,
+  };
+
+  if (localStorage.getItem("motorcycle") === null) {
+    retrieveMotorcycle = [];
+  } else {
+    retrieveMotorcycle = JSON.parse(localStorage.getItem("motorcycle"));
+  }
+
+  retrieveMotorcycle.push(obj);
+  localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
   location.reload(true);
+  return { obj };
 });
 
 function addMotorcycle() {
@@ -88,6 +109,7 @@ function displayMotorcycle() {
       let idToUpdate = retrieveMotorcycle.find(
         (moto) => moto.name === targetId
       );
+      //target value populate form
       document.querySelector("#updateMake").value = idToUpdate.name;
       document.querySelector("#updateImage").value = idToUpdate.imageUrl;
       document.querySelector("#updateDesc").value = idToUpdate.description;
@@ -96,10 +118,13 @@ function displayMotorcycle() {
         imageUrl: idToUpdate.imageUrl,
         description: idToUpdate.description,
       };
-      console.log(obj);
-      return {obj}
+      //filtering target to delete before update
+      retrieveMotorcycle = JSON.parse(
+        localStorage.getItem("motorcycle")
+      ).filter((moto) => moto.name !== e.target.id);
+      localStorage.setItem("motorcycle", JSON.stringify(retrieveMotorcycle));
+      return { obj };
     });
     document.querySelector(".row").insertAdjacentElement("beforeend", motoDiv);
   });
 }
-
