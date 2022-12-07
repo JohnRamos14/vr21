@@ -1,40 +1,59 @@
-const cards = document.querySelectorAll(".card");
-let cardsCount = cards.length;
-let firstCard, secondCard;
+const cards = document.querySelectorAll('.card');
+
 let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard, secondCard;
 
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
 
-console.log(cardsCount)
-function flipCard(){
-    this.classList.add("flip");
+  this.classList.add('flip');
 
-    if(!hasFlippedCard){
-        hasFlippedCard = true;
-        firstCard = this;
-        return;
-    }
+  if (!hasFlippedCard) {
+    hasFlippedCard = true;
+    firstCard = this;
+    return;
+  }
 
-    secondCard = this;
-    hasFlippedCard = false;
+  secondCard = this;
+  lockBoard = true;
 
-    checkForMatch();
-   console.log("clicked")
+  checkForMatch();
 }
 
-function checkForMatch(){
-    if(firstCard.dataset.id === secondCard.dataset.id){
-        disableCards();
-        return;
-    }
+function checkForMatch() {
+  let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+  console.log(isMatch);
+  isMatch ? disableCards() : unflipCards();
 }
 
-function disableCards(){
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
+function disableCards() {
+  firstCard.removeEventListener('click', flipCard);
+  secondCard.removeEventListener('click', flipCard);
+
+  resetBoard();
 }
 
+function unflipCards() {
+  setTimeout(() => {
+    firstCard.classList.remove('flip');
+    secondCard.classList.remove('flip');
 
-cards.forEach(card => {
-    card.addEventListener('click', flipCard)
-});
+    resetBoard();
+  }, 1500);
+}
 
+function resetBoard() {
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
+
+ (function shuffle() {
+   cards.forEach(card => {
+     let ramdomPos = Math.floor(Math.random() * 16);
+     card.style.order = ramdomPos;
+   });
+ })();
+
+cards.forEach(card => card.addEventListener('click', flipCard));
