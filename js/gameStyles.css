@@ -9,7 +9,7 @@ body {
   display: flex;
 }
 
-.container {
+.game{
   width: 640px;
   height: 640px;
   margin: auto;
@@ -18,20 +18,41 @@ body {
   perspective: 1000px;
 }
 
-.card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  margin: 5px;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: scale(1);
-  transition: transform 0.5s;
+.game-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+
+  .game-card:active {
+    transform: scale(0.9);
+    transition: transform 0.2s;
+  }
+
+  .front,
+.back{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: #06268075;
+  backface-visibility: hidden;
 }
 
-.card.flip{
+.game-card.flip{
     transform: rotateY(180deg);
 }
 
+.back{
+  transform: rotateY(180deg);
+}
+/* 
 .card:active {
   transform: scale(0.9);
   transition: transform 0.2s;
@@ -61,4 +82,4 @@ body {
 
 .front-face {
   transform: rotateY(180deg);
-}
+} */
